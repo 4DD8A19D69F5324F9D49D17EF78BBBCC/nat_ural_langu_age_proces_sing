@@ -1,6 +1,6 @@
 import sys
 from math import log
-traindata = open('gene.count').readlines()
+traindata = open('gene.origcount').readlines()
 testdata = open('gene.test').readlines()
 outfp = open('gene_test.p2.out','w')
 wordfreq = {}
@@ -15,6 +15,7 @@ def updatedict(_dict,_key,_add):
 def initdict():
 	global tag_list
 	tag_list=['*']
+	wordfreq['_RARE_']={}
 	for line in traindata:
 		l = line.replace('\n','').split(' ')
 		if l[1]=='WORDTAG':
@@ -24,6 +25,9 @@ def initdict():
 			if not wordfreq.has_key(word):
 				wordfreq[word]={}
 			updatedict(wordfreq[word],tag,count)
+			if count<5:
+				updatedict(wordfreq['_RARE_'],tag,count)	
+			
 		else:
 			grams=int(l[1][0])
 			count=int(l[0])
