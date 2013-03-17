@@ -22,12 +22,13 @@ def initdict():
 			count=int(l[0])
 			tag =l[2]
 			word = l[3]
-			if not wordfreq.has_key(word):
-				wordfreq[word]={}
-			updatedict(wordfreq[word],tag,count)
 			if count<5:
 				updatedict(wordfreq['_RARE_'],tag,count)	
-			
+			else:	
+				if not wordfreq.has_key(word):
+			 		wordfreq[word]={}
+				updatedict(wordfreq[word],tag,count)
+				
 		else:
 			grams=int(l[1][0])
 			count=int(l[0])
