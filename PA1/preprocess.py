@@ -14,12 +14,13 @@ for line in lines:
 fp.close()
 
 src = open('gene.train')
-dest = open('gene.train2','w+')
+dest = open('gene.train2','w')
 
 lines = src.readlines()
 for line in lines:
 	l=line.replace('\n','').split(' ')
 	if len(l)!=2:
+		dest.write('\n')
 		continue
 	word=l[0]
 	tag=l[1]
