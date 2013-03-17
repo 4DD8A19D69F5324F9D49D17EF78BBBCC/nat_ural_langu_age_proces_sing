@@ -1,6 +1,6 @@
 import sys
 
-fp = open("gene.count")
+fp = open("gene.origcount")
 lines = fp.readlines()
 rares = {}
 for line in lines:
@@ -13,8 +13,12 @@ for line in lines:
 			rares[(tag,word)]=count
 fp.close()
 
-src = open('gene.train')
-dest = open('gene.train2','w')
+if len(sys.argv)!=3:
+	print "Wrong Paratemers"
+	quit()
+
+src = open(sys.argv[1])
+dest = open(sys.argv[2],'w')
 
 lines = src.readlines()
 for line in lines:
